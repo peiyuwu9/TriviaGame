@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Basic Quiz - Timed Form</title>
+    
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Script -->
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+</head>
+<body>
+    <h1>Totally Trivial Trivia!</h1>
+    <botton id="start">Start</botton>
+    <div id="content">
+        <div id="timer-display"></div>
+        <div id="questions"></div>
+    </div>
+
+    <script>
+        
+        var correct = 0;
+        var incorrect = 0;
+        var unanswer = 0;
+
+        // 1. Set a timer.
+        var time = 300;
+
+        setTimeout(result,1000 * time);
+
+        var timeInterval;
+
+        function timer() {
+            timeInterval = setInterval(count,1000);
+        }
+
+        function count() {
+            time --;
+
+            var converted = timeConverter(time);
+
+            $("#timer-display").text("Time Remain " + converted);
+        }
+
+        // 2. Convert timeer to 00:00 format.
+        function timeConverter(t) {
+            var minutes = Math.floor(t/60);
+            var seconds = t - (minutes*60);
+
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            } 
+
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+
+            return minutes + ":" + seconds;
+        }
+
+        // 3. Set a question pop function.
+        var questionAnswer = {
+            q1: "How did Daenerys Targaryen eventually hatch her dragon eggs?",
+            a1: ["In a lightning storm","In a funeral pyre","In a firepalce","In a frozen cave"],
+            q2: "The phrase 'Valar Morghulis' or 'all men must die' is usuallu responed with:",
+            a2: ["'Valar Dohaeris' or 'all men must serve'","'Valar Rohnas' or 'all men must live'","'Valar GoGo' or 'll men must dance'","'Valar Bhores' or 'all men must sleep'"],
+            q3: "What is the only thing that can put out volatile Wildfire?",
+            a3: ["Sand","Water","Dragon's Blood","Sunlight"],
+            q4: "Besides dargonglass, what is the only other substance capable of defeating White Walker?",
+            a4: ["Weirdwood","Wildfire","Valrian Steel","Snowballs"],
+            q5: "How many times has Beric Dondarrion been brouhgt back to life?",
+            a5: [3,4,5,6],
+            q6: "Which Starks family direwolf was killed in retaliation for an attack on Prince Joffery?",
+            a6: ["Ghost","Lady","Nymeria","Summer"],
+            q7: "'It's nothing' were the last words of this infamous character:",
+            a7: ["Renly Baratheon","Tywon Lannister","Robb Stark","King Joffery"],
+            q8: "The name of King Tommen's favorite cat is:",
+            a8: ["Battle Pus","Little Lion","Ser Pounce","Prince Fuzzy"],
+            q9: "How shoots the flaming arrow that subsequently destroies Stannis' fleet in Blackwater Bay?",
+            a9: ["Tyrion Lannister","King Joffery","Jamie Lannister","Bronn"],
+            q10: "Prince Oberyn Martell is nicknamed the 'Red Viper' because of his combat and:",
+            a10: ["Pride in drawing blood first","Knowledge of poisons","Nighttime attacks","Ruby-colored armor"]
+        };
+
+        //a1: In a funeral pyre
+        //a2: 'Valar Dohaeris' or 'all men must serve'
+        //a3: Sand
+        //a4: Valrian Steel
+        //a5: 6
+        //a6: Lady
+        //a7: King Joffery
+        //a8: Ser Pounce
+        //a9: Bronn
+        //a10: Knowledge of poisons
+
+        function questionPop() {
+            var questionPrint = $("<div>")
+            for (var i=1; i<=10; i++) {
+                questionPrint.attr("class","question");
+                questionPrint.text=(questionAnswer.q+[i]);
+                $("#questions").append(questionAnswer);
+                for (var j=0; j<4; j++) {
+                    questionPrint.text=("<botton>" + questionAnswer.a+[i]+ "[j]" + "<botton>");
+                    $("#questions").append(questionAnswer);
+                }
+            }
+        }
+
+        // 4. Set a funtion to print result.
+        function result() {
+            var resultPrint = $("<div>");
+            resultPrint.attr("class","resultPrint")
+            resultPrint.text = correct;
+            $("#content").append("Submitted");
+            resultPrint.text = correct;
+            $("#content").append(resultPrint);
+            resultPrint.text = incorrect;
+            $("#content").append(resultPrint);
+            resultPrint.text = unanswer;
+            $("#content").append(resultPrint);
+        }
+        
+        // 5. When players click start botton, questions pop and timer starts.
+        $("#start").on("click",function(){
+            timer();
+            questionPop();
+            
+            if (time === 0){
+                result();
+            }
+        })
+    
+
+    </script>
+    
+</body>
+</html>

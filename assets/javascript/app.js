@@ -98,6 +98,7 @@ var questions = [
 //a9: Bronn
 //a10: Knowledge of poisons
 
+//4. Set a function to pop questions.
 function questionPop () {
     for (var i=0; i<questions.length; i++) {
         var questionPrint = $("<div>");
@@ -121,7 +122,7 @@ function questionPop () {
     }
 }
 
-// 4. Set a funtion to print result.
+// 5. Set a funtion to print result.
 function resultPrint() {
     $("#timer-display").html("");
     var resultPrint = $("<h2>");
@@ -143,7 +144,7 @@ function resultPrint() {
     $("#timer-display").attr("style","display: none");
 }
 
-// 5. Once players select, return answers back to question array for result check funtion
+// 6. Once players select, return answers back to question array for result check funtion
 function answerSelet() {
     for (var k=0; k<questions.length; k++) {
         questions[k].userAnswer = $("input[name=answer" + [k+1] + "]:checked").val();
@@ -151,7 +152,7 @@ function answerSelet() {
     }
 }
 
-// 6. Create a result check function
+// 7. Create a result check function
 function resultChecker() {
 
     answerSelet();
@@ -169,7 +170,7 @@ function resultChecker() {
     }
 }
 
-// 6. When players click start botton, questions pop and timer starts.
+// 8. When players click start botton, questions pop and timer starts.
 $("#start").on("click",function(){
     $("#start").attr("style","display: none");
     $("#timer-display").attr("style","display: inline");

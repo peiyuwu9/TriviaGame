@@ -14,4 +14,3 @@ Create a game to practice HTML, CSS, Javascript and jQuery language.
 1. Once page loaded, timer will start.
 2. Please complet all questions before time is up.
 3. Brower will return you how many quetions you get correct and incorrect.
-
